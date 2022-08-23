@@ -1,2 +1,4 @@
 # Wordle-Solver
-Automated program for attempting the Wordle game. 
+Automated program for playing the Wordle game. 
+
+
