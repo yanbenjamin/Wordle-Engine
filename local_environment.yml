@@ -1,0 +1,10 @@
+name: wordle_engine 
+channels: 
+  - defaults 
+dependencies: 
+  - python
+  - numpy 
+  - matplotlib
+  - pip
+  - pip:
+    - tqdm 
