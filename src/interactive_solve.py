@@ -1,19 +1,26 @@
+"""
+[interactive_solve.py] This interactive command line program helps a user to solve
+the Wordle by recommending guesses. It can be used for any Wordle variant with different
+numbers of words to solve simultaneously (the number of allowed guesses is the number
+of words plus 5). 
+
+To run the program, use the template
+    python3 interactive_solve.py [number of words to solve simultaneously]
+and the program will print out instructions for inputting responses from the Wordle. 
+
+"""
+
 from extract_fiveletter_words import * 
 from utils import *
 from visualize_wordle import *
 
 import sys 
 
-MAIN_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver"
-FIGURES_DIR = MAIN_DIR + "/sample"
-SRC_DIR = MAIN_DIR + "/src"
-DOCS_DIR = MAIN_DIR + "/docs"
-TESTS_DIR = MAIN_DIR + "/tests"
+#global parameter used for priority-weighing possible 5-letter words in the queue
+HIGHEST_FREQUENCY = 1220752
 
 def getWordFrequency(word,frequency_dict):
     return frequency_dict[word]
-
-HIGHEST_FREQUENCY = 1220752
 
 def getWordFrequency(word,frequency_dict):
     return frequency_dict[word]
@@ -98,7 +105,6 @@ def solve_word_interactive(nyt_words, frequency_dict, user_loop = False):
 
   return False, num_tries 
 
-  #also return the num_tries 
 
 def colorSequence_isSolved(color_sequence):
     for color in color_sequence: 
@@ -123,9 +129,9 @@ def solve_multiple_words_interactive(N, max_tries, nyt_words, frequency_dict):
 
   For instance, if you are playing Quordle (4 words), after seeing [green, yellow, yellow, gray, gray], 
   [green,green,green,green,green], [green,gray,gray,gray,gray], and [green,yellow,green,green,yellow] on the screen,
-  you should input GYYRR GGGGG GRRRR GYGGY
-  
-  The algorithm is order-invariant so the ordering of the color sequences does not matter. 
+  you should input GYYRR GGGGG GRRRR GYGGY. Make sure to keep the order of color sequences consistent.
+
+  Also, if a word is finished, just write GGGGG as its color sequence in the subsequent guesses. 
   ------------------------------------------------------------------------------------------ 
   """.format(N, max_tries)
   print(intro_message)
@@ -158,8 +164,6 @@ def solve_multiple_words_interactive(N, max_tries, nyt_words, frequency_dict):
             solved_states[word_idx] = True 
             remaining_word_idxs.remove(word_idx)
 
-        #axe them from the list
-    
     #reduce the remaining candidate pools to make the next guess 
     if (len(remaining_word_idxs) == 0):
       break 
@@ -193,8 +197,6 @@ def solve_multiple_words_interactive(N, max_tries, nyt_words, frequency_dict):
   
   return solved_states, num_tries, attempts_array 
 
-
-
 if __name__ == "__main__":
     
     frequency_dict = get_WordFrequencies()
@@ -209,11 +211,4 @@ if __name__ == "__main__":
     else: 
         print("\nUnable to solve the {}-word Wordle :(".format(N))
 
-    """
-    solve_state, num_tries = solve_word_interactive(nyt_words, frequency_dict, True)
-    if (solve_state == True):
-        print("\nSolved the Wordle in {}!".format(num_tries))
-    else:
-        print("\nThe program was unable to solve the Wordle :(")
-    """
 

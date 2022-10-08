@@ -80,7 +80,6 @@ def solve_two_words(word_1, word_2, nyt_words, frequency_dict, starter_word = "S
       union_words = list(set(remaining_words_1).union(set(remaining_words_2)))
       union_words = sortWords_byFrequency(union_words, frequency_dict)
 
-      #can tweak to focus on the word with less letters
       if (len(joint_words) > 0):
         next_attempt = joint_words[0]
       elif (len(union_words) > 0):
@@ -97,20 +96,7 @@ def solve_two_words(word_1, word_2, nyt_words, frequency_dict, starter_word = "S
   
   return solved_state_1, solved_state_2, num_tries, ATTEMPTS
 
-  """ 
-    if (len(remaining_words_1) == 0): #error checking 
-      ATTEMPTS.append(ATTEMPTS[-1])
-
-    #add the most common word (according to Wikipedia corpus frequency) still remaining 
-    if (num_tries < MAX_NUM_TRIES): #if we are still allowed to guess
-        ATTEMPTS.append(remaining_words[0])
-  """
-  #at the end, plot the Wordle result to a .jpg file using Matplotlib
-
-
-  #return wordle_solved_state, num_tries, ATTEMPTS 
-
-#move to performance testing for dordle solver
+ 
 if __name__ == "__main__": 
     frequency_dict = get_WordFrequencies()
     nyt_words = get_NYTWords() 
@@ -120,52 +106,3 @@ if __name__ == "__main__":
 
     state_1, state_2, num_tries, attempts = solve_two_words(word_1,word_2,nyt_words,frequency_dict,visuals=True)
     
-
-
-    """
-
-    times = []
-    solved = 0
-    total = int(sys.argv[1])
-    for _ in range(total):
-      word_1, word_2 = np.random.choice(nyt_words, size = 2, replace = False)
-      i_time = time.time()
-      state_1, state_2, num_tries, attempts = solve_two_words(word_1,word_2,nyt_words,frequency_dict,visuals=False)
-      f_time = time.time() 
-      duration = f_time - i_time 
-      times.append(duration)
-
-      if (state_1 == True and state_2 == True):
-        solved += 1
-
-    print("Average Time: {} s".format(np.mean(times)))
-    print("Accuracy: {}".format(100 * solved / total))
-
-    """
-
-
-    
-    #runs through each word inputted in the command line, and attempt to solve for it
-    #in Wordle using SLATE as the starting word
-
-    #word_1 = sys.argv[1]
-    ##word_2 = sys.argv[2] 
-    #state_1, state_2, num_tries, attempts = solve_two_words(word_1,word_2,nyt_words,frequency_dict,visuals=True)
-    
-    """
-    for word in sys.argv[1:]: 
-        word = word.upper()
-        if (word not in nyt_words):
-            print("Word {} not in possible NYT Wordle solutions".format(word))
-            continue 
-        solved_state, num_tries, attempts = solve_two_words(word, nyt_words, frequency_dict, visuals = True)
-       
-        if (solved_state == True):
-            #successful solve!
-            figure_path = os.path.join(FIGURES_DIR, "wordle_{}.jpg".format(word))
-            print("Solved {} in {} Tries -> Board Result saved to {}".format(
-                word, num_tries, figure_path))
-        else:
-            print("Unable to solve {} (last guess: {}) -> Board Result saved to {}".format(
-                word, attempts[-1], figure_path)
-      """

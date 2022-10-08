@@ -1,3 +1,7 @@
+"""
+[utils.py] file mainly used for developing and abstracting 
+helper functions for the Wordle program
+"""
 
 """
 generates a dictionary of a word's chaacter frequencies:

@@ -1,3 +1,14 @@
+"""
+[solve_wordle.py] file that leverages the program to solve the Wordle
+for mystery words that are provided via command line. The corresponding results (Wordle boards)
+are saved in jpg files to the "sample" directory. 
+
+As a template,
+    python3 solve_wordle.py [word 1] [word 2] ... [word n]
+will attempt all n words that are valid NYT Wordle solutions, and save the resulting boards
+with the naming format wordle_[mystery word].jpg. 
+"""
+
 from extract_fiveletter_words import * 
 from utils import *
 from visualize_wordle import *
@@ -8,7 +19,6 @@ MAIN_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver"
 FIGURES_DIR = MAIN_DIR + "/sample"
 SRC_DIR = MAIN_DIR + "/src"
 DOCS_DIR = MAIN_DIR + "/docs"
-TESTS_DIR = MAIN_DIR + "/tests"
 
 def getWordFrequency(word,frequency_dict):
     return frequency_dict[word]

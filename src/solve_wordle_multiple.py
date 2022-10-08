@@ -1,3 +1,7 @@
+"""
+[solve_wordle_mutiple.py] 
+"""
+
 from extract_fiveletter_words import * 
 from utils import *
 from visualize_wordle import *
@@ -97,63 +101,13 @@ def solve_multiple_words(N, mystery_words, nyt_words, frequency_dict, max_tries,
   
   return solved_states, num_tries, attempts_array 
 
-def simulate_multiple_wordle(N, num_simulations, nyt_words, frequency_dict):
-  successes = 0
-  total_time = 0
-  max_tries_dict = {1: 6, 2: 7, 4: 9, 8: 13, 16: 21}
-  if (N not in max_tries_dict):
-    raise ValueError("N must be in {1,2,4,8}")
-  for _ in tqdm(range(num_simulations)): 
-    words = np.random.choice(nyt_words, size = N, replace = False)
-    init_time = time.time() 
-    solved_states, num_tries, attempts_array = solve_multiple_words(N, words, nyt_words, frequency_dict, max_tries_dict[N])
-    final_time = time.time()
-    if (count_words_solved(solved_states) == N):
-      successes += 1
-    total_time += (final_time - init_time)
-  
-  return successes, total_time
-
-
-
 if __name__ == "__main__": 
   frequency_dict = get_WordFrequencies()
   nyt_words = get_NYTWords() 
 
-  """
   mystery_words = sys.argv[1:]
   N = len(mystery_words)
-  max_tries = 9
-  solved_states, num_tries, attempts_array = solve_N_words(N, mystery_words, nyt_words, frequency_dict, max_tries)
-
-  print(attempts_array)
-  """
-
-  num_simulations = 10000
-  #quordle and octordle simulations
-  print("Wordle Simulations\n--------------------------------------")
-  successes, total_time = simulate_multiple_wordle(1, num_simulations, nyt_words, frequency_dict)
-  print("Wordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
-  print("Wordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
-
-  print("\nDordle Simulations\n--------------------------------------")
-  successes, total_time = simulate_multiple_wordle(2, num_simulations,nyt_words, frequency_dict)
-  print("Dordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
-  print("Dordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
-
-  num_simulations = 1000
-  print("\nQuordle Simulations\n--------------------------------------")
-  successes, total_time = simulate_multiple_wordle(4, num_simulations,nyt_words, frequency_dict)
-  print("Quordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
-  print("Quordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
+  max_tries = N + 5 
+  solved_states, num_tries, attempts_array = solve_multiple_words(N, mystery_words, nyt_words, frequency_dict, max_tries)
 
   
-  print("\nOctordle Simulations\n--------------------------------------")
-  successes, total_time = simulate_multiple_wordle(8, num_simulations,nyt_words, frequency_dict)
-  print("Octordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
-  print("Octordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
-
-  print("\nSedecordle Simulations\n--------------------------------------")
-  successes, total_time = simulate_multiple_wordle(16, num_simulations,nyt_words, frequency_dict)
-  print("Sedecordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
-  print("Sedecordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
