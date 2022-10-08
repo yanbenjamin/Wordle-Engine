@@ -1,3 +1,15 @@
+"""
+solve_dordle.py
+---------------------
+file that leverages the program to solve the Dordle, with the corresponding board images
+saved to the "sample" directory as a filename dordle_[word1]_[word2].jpg. 
+Note that solve_wordle_multiple.py generalizes the algorithm here to arbitrary words solved simultaneously. 
+
+As a template,
+    python3 solve_wordle.py [word 1] [word 2]
+will attempt to solve both word1 and word2 simultaneously in 7 tries. 
+"""
+
 from extract_fiveletter_words import * 
 from utils import *
 from visualize_wordle import *
@@ -101,8 +113,8 @@ if __name__ == "__main__":
     frequency_dict = get_WordFrequencies()
     nyt_words = get_NYTWords() 
 
-    word_1 = sys.argv[1] 
-    word_2 = sys.argv[2] 
+    word_1 = sys.argv[1].upper() 
+    word_2 = sys.argv[2].upper()
 
     state_1, state_2, num_tries, attempts = solve_two_words(word_1,word_2,nyt_words,frequency_dict,visuals=True)
     

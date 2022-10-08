@@ -1,5 +1,7 @@
 """
-[performance_wordle] Runs performance simulations for Wordle, Dordle (2 words at a time),
+simulate_wordle.py
+---------------------
+Runs performance simulations for Wordle, Dordle (2 words at a time),
 Quordle (4), Octordle (8), and Sedecordle (16). 
 """
 
@@ -12,6 +14,8 @@ from extract_fiveletter_words import *
 import sys
 
 """
+harness function to run several simulations of the Wordle program. Works on current variants of
+Wordle with 1,2,4,8,16 words (Worlde, Dordle, Quordle, Octordle, Sedecordle, respectively)
 """
 def simulate_multiple_wordle(N, num_simulations, nyt_words, frequency_dict):
   successes = 0
@@ -20,11 +24,12 @@ def simulate_multiple_wordle(N, num_simulations, nyt_words, frequency_dict):
   #number of allowed guesses is the number of words to be solved plus five. 
   max_tries_dict = {1: 6, 2: 7, 4: 9, 8: 13, 16: 21}
   if (N not in max_tries_dict):
-    raise ValueError("N must be in {1,2,4,8}")
+    raise ValueError("N must be in {1,2,4,8,16}")
   
   #runs the specified number of simulations, choosing a set of Wordle words randomly. 
   for _ in tqdm(range(num_simulations)): 
     words = np.random.choice(nyt_words, size = N, replace = False)
+    #keeps track of the time needed for each game, as well as whether the word was solved. 
     init_time = time.time() 
     solved_states, num_tries, attempts_array = solve_multiple_words(N, words, nyt_words, frequency_dict, max_tries_dict[N])
     final_time = time.time()
@@ -34,6 +39,11 @@ def simulate_multiple_wordle(N, num_simulations, nyt_words, frequency_dict):
   
   return successes, total_time
 
+"""
+runs the Wordle, Dordle, Quordle, Octordle, and Sedecordle simulations.
+The number of simulations is by default 10000, but can be manually adjusted on the command line. 
+  python3 simulate_wordle.py [number of simulations]
+"""
 if __name__ == "__main__":
 
   frequency_dict = get_WordFrequencies()
@@ -60,7 +70,6 @@ if __name__ == "__main__":
   print("Quordle Accuracy: {:2f}%".format(successes / num_simulations * 100))
   print("Quordle Average Time Per Problem: {:3f} s".format(total_time / num_simulations))
 
-  
   print("\nOctordle Simulations\n--------------------------------------")
   successes, total_time = simulate_multiple_wordle(8, num_simulations,nyt_words, frequency_dict)
   print("Octordle Accuracy: {:2f}%".format(successes / num_simulations * 100))

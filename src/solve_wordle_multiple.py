@@ -1,5 +1,13 @@
 """
-[solve_wordle_mutiple.py] 
+solve_wordle_mutiple.py
+---------------------
+Programmed to play any Wordle variant with M words and M + 5 tries using a priority queue
+that ranks word candidates first based on the number of mystery words they could still be 
+(haven't been ruled out yet) and then their frequency in a gigantic text corpus. 
+
+This file can be run for debugging / testing, with 
+  python3 solve_wordle_multiple.py [word 1] ... [word m]
+attempting to solve all m words simultaneously in m + 5 tries. 
 """
 
 from extract_fiveletter_words import * 
@@ -11,12 +19,7 @@ import time
 import numpy as np
 from tqdm import tqdm
 
-MAIN_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver"
-FIGURES_DIR = MAIN_DIR + "/sample"
-SRC_DIR = MAIN_DIR + "/src"
-DOCS_DIR = MAIN_DIR + "/docs"
-TESTS_DIR = MAIN_DIR + "/tests"
-
+#global variable used for weighing words in the priority queue. 
 HIGHEST_FREQUENCY = 1220752
 
 def getWordFrequency(word,frequency_dict):
@@ -26,6 +29,10 @@ def sortWords_byFrequency(word_list, frequency_dict):
     return sorted(word_list[:], key = lambda word: getWordFrequency(word,frequency_dict),
                           reverse = True)
 
+"""
+word priority is first determine by the number of mystery words it can still match (hasn't
+been ruled out yet) and then by its frequency in a massive text corpus. 
+"""
 def get_WordPriority(word,global_frequency_dict, wordle_appearance_dict):
     if (word not in wordle_appearance_dict):
       local_frequency = 0
@@ -44,6 +51,10 @@ def count_words_solved(solved_states):
       solved += 1
   return solved
 
+"""
+plays Wordle with an arbitrary number of words with a variable number of max tries,
+and returns which words were solved as a boolean array, the number of tries, and the attempts. 
+"""
 def solve_multiple_words(N, mystery_words, nyt_words, frequency_dict, max_tries, starter_word = "SLATE"):
 
   if (N != len(mystery_words)):
@@ -105,9 +116,17 @@ if __name__ == "__main__":
   frequency_dict = get_WordFrequencies()
   nyt_words = get_NYTWords() 
 
-  mystery_words = sys.argv[1:]
+  mystery_words = [word.strip().upper() for word in sys.argv[1:]]
   N = len(mystery_words)
   max_tries = N + 5 
   solved_states, num_tries, attempts_array = solve_multiple_words(N, mystery_words, nyt_words, frequency_dict, max_tries)
+  num_words_solved = count_words_solved(solved_states)
+  if (num_words_solved == N):
+    print("Program was able to solve mystery words {} in {} guesses".format(mystery_words, num_tries))
+  else:
+    print("Program was unable to solve mystery words {}.".format(num_tries))
+  print("Here were the guesses: {}".format(attempts_array))
+
+
 
   

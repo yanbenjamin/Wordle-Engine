@@ -1,5 +1,7 @@
 """
-[interactive_solve.py] This interactive command line program helps a user to solve
+interactive_solve.py
+------------------------
+This interactive command line program helps a user to solve
 the Wordle by recommending guesses. It can be used for any Wordle variant with different
 numbers of words to solve simultaneously (the number of allowed guesses is the number
 of words plus 5). 
@@ -84,14 +86,11 @@ def solve_word_interactive(nyt_words, frequency_dict, user_loop = False):
 
     #reduce the set of remaining words, and produce 
     #the most likely one of them by frequency
-
     remaining_words = reduce_candidate_pool(remaining_words, attempt, color_sequence)
     if (len(remaining_words) > 0):
         next_guess = remaining_words[0]
-        #ATTEMPTS.append(remaining_words[0])
     else:
         next_guess = ATTEMPTS[-1]
-        #ATTEMPTS.append(ATTEMPTS[-1])
 
     if (num_tries < MAX_NUM_TRIES):
         if (user_loop == False):

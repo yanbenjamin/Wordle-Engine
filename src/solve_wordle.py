@@ -1,5 +1,7 @@
 """
-[solve_wordle.py] file that leverages the program to solve the Wordle
+solve_wordle.py
+---------------------
+file that leverages the program to solve the Wordle
 for mystery words that are provided via command line. The corresponding results (Wordle boards)
 are saved in jpg files to the "sample" directory. 
 
@@ -15,10 +17,12 @@ from visualize_wordle import *
 
 import sys 
 
+"""
 MAIN_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver"
 FIGURES_DIR = MAIN_DIR + "/sample"
 SRC_DIR = MAIN_DIR + "/src"
 DOCS_DIR = MAIN_DIR + "/docs"
+"""
 
 def getWordFrequency(word,frequency_dict):
     return frequency_dict[word]
@@ -59,6 +63,9 @@ def solve_word(mystery_word, nyt_words, frequency_dict, starter_word = "SLATE",v
   
   #at the end, plot the Wordle result to a .jpg file using Matplotlib
   if (visuals == True):
+    current_file = os.path.abspath(__file__)
+    Wordle_directory = "/".join(current_file.split("/")[:-2])
+    FIGURES_DIR = Wordle_directory + "/sample"
     figure_path = os.path.join(FIGURES_DIR, "wordle_{}.jpg".format(mystery_word))
     plot_wordle_fullboard(mystery_word, ATTEMPTS, figure_path)
 
@@ -67,6 +74,11 @@ def solve_word(mystery_word, nyt_words, frequency_dict, starter_word = "SLATE",v
 if __name__ == "__main__": 
     frequency_dict = get_WordFrequencies()
     nyt_words = get_NYTWords() 
+
+    #determine where to save the figures
+    current_file = os.path.abspath(__file__)
+    Wordle_directory = "/".join(current_file.split("/")[:-2])
+    FIGURES_DIR = Wordle_directory + "/sample"
     
     #runs through each word inputted in the command line, and attempt to solve for it
     #in Wordle using SLATE as the starting word

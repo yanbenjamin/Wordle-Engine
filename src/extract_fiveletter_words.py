@@ -1,5 +1,7 @@
 """
-[extract_fiveletter_words.py] this file chiefly contains two functions for (1) gathering a 
+extract_fiveletter_words.py
+-------
+this file chiefly contains two functions for (1) gathering a 
 list of NYT solution words and (2) ranking these words by
 their frequencies inside a massive text corpus. These functions are deployed in the Wordle 
 program to help optimize and refine the word search during each guess. 

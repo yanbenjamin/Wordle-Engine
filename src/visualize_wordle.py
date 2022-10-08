@@ -1,5 +1,7 @@
 """
-[visualize_wordle.py] auxiliary file used for producing visual Wordle
+visualize_wordle.py
+---------------------
+auxiliary file with matplotlib dependencies used for producing visual Wordle
 and Dordle boards that resemble the actual website format. 
 """
 
@@ -9,7 +11,6 @@ import os
 from utils import * 
 plt.style.use("fivethirtyeight")
 
-FIGURE_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver" + "/sample"
 
 """
 function to translate a named color on the Wordle board to an RGB tuple. 
@@ -19,7 +20,7 @@ def get_WordleColor_RGB(color_name):
     "green": [102,255,102],
     "gray": [190,190,190],
     "yellow": [255,255,133],
-    "white": [20,20,20]}
+    "darkgray": [20,20,20]}
     #"white": [255,255,255]}
     if (color_name in list(RGB_dict.keys())):
         return RGB_dict[color_name]
@@ -68,13 +69,13 @@ def plot_dordle_fullboard(word_1, word_2, ATTEMPTS, figure_path):
   for attempt_number, attempt in enumerate(ATTEMPTS): 
 
     if (word_1_solved == True): 
-      plot_colors_1.append([get_WordleColor_RGB("white") for _ in range(TOTAL_LETTERS)])
+      plot_colors_1.append([get_WordleColor_RGB("darkgray") for _ in range(TOTAL_LETTERS)])
     else: 
       color_sequence_1 = get_color_sequence(attempt,word_1)
       plot_colors_1.append([get_WordleColor_RGB(color) for color in color_sequence_1])
 
     if (word_2_solved == True):
-      plot_colors_2.append([get_WordleColor_RGB("white") for _ in range(TOTAL_LETTERS)])
+      plot_colors_2.append([get_WordleColor_RGB("darkgray") for _ in range(TOTAL_LETTERS)])
     else: 
       color_sequence_2 = get_color_sequence(attempt,word_2)
       plot_colors_2.append([get_WordleColor_RGB(color) for color in color_sequence_2])
@@ -94,8 +95,8 @@ def plot_dordle_fullboard(word_1, word_2, ATTEMPTS, figure_path):
 
   #ensures that each cell in the Dordle board will be assigned the correct color. 
   for _ in range(TOTAL_TRIES - len(ATTEMPTS)):
-    plot_colors_1.append([get_WordleColor_RGB("white") for _ in range(TOTAL_LETTERS)])
-    plot_colors_2.append([get_WordleColor_RGB("white") for _ in range(TOTAL_LETTERS)])
+    plot_colors_1.append([get_WordleColor_RGB("darkgray") for _ in range(TOTAL_LETTERS)])
+    plot_colors_2.append([get_WordleColor_RGB("darkgray") for _ in range(TOTAL_LETTERS)])
 
   fig, ax = plt.subplots(nrows = 1, ncols = 2, figsize = (10,6))
   ax[0].imshow(plot_colors_1)
@@ -120,7 +121,7 @@ def plot_dordle_fullboard(word_1, word_2, ATTEMPTS, figure_path):
   plt.savefig(figure_path)
 
 """
-main function, primarily to be used for debugging
+main function, primarily to be used for debugging / testing. 
 
 for command line, write
   python3 visualize_wordle.py [mystery word 1] [mystery word 2] [guess 1] [guess 2] ... [guess n]
@@ -129,6 +130,11 @@ to produce a Dordle board visual and save it to the "sample" directory.
 if __name__ == "__main__":
   word_1 = sys.argv[1]
   word_2 = sys.argv[2] 
+
+  current_file = os.path.abspath(__file__)
+  Wordle_directory = "/".join(current_file.split("/")[:-2])
+  FIGURE_DIR = Wordle_directory + "/sample"
+  
   ATTEMPTS = sys.argv[3:]
   if (len(ATTEMPTS) > 7):
     ATTEMPTS = ATTEMPTS[:7]
