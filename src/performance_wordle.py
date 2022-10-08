@@ -9,13 +9,20 @@ import tqdm
 from tqdm import tqdm 
 import numpy as np
 from extract_fiveletter_words import *
+import sys
 
+"""
+"""
 def simulate_multiple_wordle(N, num_simulations, nyt_words, frequency_dict):
   successes = 0
   total_time = 0
+
+  #number of allowed guesses is the number of words to be solved plus five. 
   max_tries_dict = {1: 6, 2: 7, 4: 9, 8: 13, 16: 21}
   if (N not in max_tries_dict):
     raise ValueError("N must be in {1,2,4,8}")
+  
+  #runs the specified number of simulations, choosing a set of Wordle words randomly. 
   for _ in tqdm(range(num_simulations)): 
     words = np.random.choice(nyt_words, size = N, replace = False)
     init_time = time.time() 
@@ -32,8 +39,11 @@ if __name__ == "__main__":
   frequency_dict = get_WordFrequencies()
   nyt_words = get_NYTWords() 
 
-  num_simulations = 10000
-  #quordle and octordle simulations
+  if (len(sys.argv) < 2):
+    num_simulations = 10000
+  else:
+    num_simulations = int(sys.argv[1]) #default 10000
+
   print("Wordle Simulations\n--------------------------------------")
   successes, total_time = simulate_multiple_wordle(1, num_simulations, nyt_words, frequency_dict)
   print("Wordle Accuracy: {:2f}%".format(successes / num_simulations * 100))

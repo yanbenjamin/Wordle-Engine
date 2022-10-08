@@ -1,6 +1,8 @@
 # Wordle Engine 
 ## Description
-This Wordle engine is an automated Python program for playing the Wordle game. It has been extended also to variants Dordle (2 words simultaneously in 7 tries), Quordle (4 words in 9 tries), and Octordle (8 words in 13 tries). More generally, it applies to any variant with $M$ words and $M+5$ word tries. Below are sample results of the engine on Wordle and Dordle, respectively.
+This Wordle engine is an automated Python program for playing the Wordle game. It is able to solve $96.1\%$ of the possible words in Wordle with an average of $\sim 3.9$ guesses. 
+<br/>
+It has been extended with reasonable accuracy to variants Dordle (2 words simultaneously in 7 tries), Quordle (4 words in 9 tries), and Octordle (8 words in 13 tries). More generally, it applies to any variant with $M$ words and $M+5$ word tries. Below are sample results of the engine on Wordle and Dordle, respectively. More quantitative results are shown below. 
 ### Sample Result from Wordle
 ![image of Wordle result](./sample/wordle_DREAM.jpg?raw=true)
 ### Sample Result from Dordle

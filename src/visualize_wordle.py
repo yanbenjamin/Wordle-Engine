@@ -19,7 +19,8 @@ def get_WordleColor_RGB(color_name):
     "green": [102,255,102],
     "gray": [190,190,190],
     "yellow": [255,255,133],
-    "white": [255,255,255]}
+    "white": [20,20,20]}
+    #"white": [255,255,255]}
     if (color_name in list(RGB_dict.keys())):
         return RGB_dict[color_name]
     raise ValueError("Invalid Wordle Color")

@@ -31,10 +31,10 @@ def get_WordPriority(word,global_frequency_dict, wordle_appearance_dict):
       local_frequency = 0
     else: 
       local_frequency = wordle_appearance_dict[word]
-    return local_frequency * (HIGHEST_FREQUENCY + 1) + frequency_dict[word]
+    return local_frequency * (HIGHEST_FREQUENCY + 1) + global_frequency_dict[word]
 
 def sortWords_byPriority(word_list, global_frequency_dict, wordle_appearance_dict):
-    return sorted(word_list[:], key = lambda word: get_WordPriority(word,frequency_dict, wordle_appearance_dict),
+    return sorted(word_list[:], key = lambda word: get_WordPriority(word,global_frequency_dict, wordle_appearance_dict),
                           reverse = True)
 
 def count_words_solved(solved_states):
