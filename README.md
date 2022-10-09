@@ -63,11 +63,11 @@ python3 src/interactive_solve.py 1
 to play the standard Wordle. To play a variant, change the $1$ above to the number of words that are being solved simultaneously (Dordle = 2, Quordle = 4, etc). Then, the program will provide the instructions at the top for using the 
 engine. A sample usage for the daly Wordle (October 8th) is shown below. Here, the colored boxes annotate where the user provides input to the program. Green boxes describe where you tell the engine which guesses you decided to make; orange boxes describe the resulting color sequences from the game (with characters G,Y,R for green, yellow, and gray, respectively). 
 <br/>
-![image of interactive engine for 1 word (Wordle)](./repo_images/interactive_1word.png)
+![image of interactive engine for 1 word (Wordle)](./repo_images/interactive_1word.png?raw=true)
 <br/>
 A sample for playing the daily Quordle on October 8th is also shown below. Note that there are four color sequences per word as there are four words to solve simultaneously. The color annotations are identically applied. 
 <br/>
-![image of interactive engine for 4 words (Quordle)](./repo_images/interactive_4words.png)
+![image of interactive engine for 4 words (Quordle)](./repo_images/interactive_4words.png?raw=true)
 <br/>
 
 ### Producing Wordle Board Visualizations 
