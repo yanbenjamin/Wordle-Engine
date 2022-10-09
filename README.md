@@ -16,17 +16,17 @@ As acknowledgement, this project makes use of the NYT Wordle list of 2309 five-l
 ## Accessing and Using the Engine Locally 
 ### Cloning and Navigating Repository 
 In the directory you want the repository to be located, run:
-'''
+```
 git clone https://github.com/yanbenjamin/Wordle-Engine.git
 cd Wordle-Engine 
-'''
-There is a lightweight, custom Conda environment provided in local_environment.yml. If you have Conda installed, to ensure having the correct dependencies, run: 
-'''
+```
+There is a lightweight, custom Conda environment provided in `'local_environment.yml'`. If you have Conda installed, to ensure having the correct dependencies, run: 
+```
 conda env create -f local_environment.yml
 conda activate wordle_engine
 conda deactivate #after use 
-'''
-If you don't have Conda, most Python and Linux distributions have the necessary packages, which can be found in the .yml file.  In this repository, you will find the list of NYT Wordle words and word frequency data located in the docs folder, the main code for running the engine in the src folder, and a few Wordle board visualizations from example runs in the sample folder. 
+```
+If you don't have Conda, most Python and Linux distributions have the necessary packages, which can be found in the .yml file.  In this repository, you will find the list of NYT Wordle words and word frequency data located in the `'docs'` folder, the main code for running the engine in the `'src'` folder, and a few Wordle board visualizations from example runs in the `'sample'` folder. Additional details and documentation of each .py file are written at the top of the source code. 
 
 ### Using the Interactive Command Line Tool 
 ### Producing Wordle Board Visualizations 
