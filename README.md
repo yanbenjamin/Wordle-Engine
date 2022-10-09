@@ -1,4 +1,11 @@
 # Wordle Engine 
+# Table of Contents
+1. [Description](#description) 
+2. [Dataset Credits] (#dataset)
+3. [Performance](#performance)
+
+<a name="description"></a>
+
 ## Description
 This Wordle engine is an automated Python program for playing the Wordle game. Using "SLATE" as the starting word, it is able to solve $98.9$ percent of the possible words in Wordle with an average of $\sim 3.8$ guesses.
 <br/>
@@ -8,8 +15,13 @@ It has been extended with reasonable accuracy to variants Dordle (2 words simult
 ![image of Wordle result](./sample/wordle_DREAM.jpg?raw=true)
 ### Sample Result from Dordle
 ![image of Dordle result](./sample/dordle_ISLET_POINT.jpg?raw=true)
+
+<a name="dataset"></a>
+
 ## Dataset Credits
 As acknowledgement, this project makes use of the NYT Wordle list of 2309 five-letter words obtained from [link](https://gist.github.com/cfreshman/a7b776506c73284511034e63af1017ee), as well as calculated word frequencies across the Wikipedia corpus from [link](https://en.lexipedia.org/). 
+
+<a name="performance"></a>
 
 ## Performance 
 **Wordle:** For all 2309 possible words that inhabit the NYT Wordle solution list, here are the number of guesses required by the engine. 
@@ -24,7 +36,11 @@ As acknowledgement, this project makes use of the NYT Wordle list of 2309 five-l
 | `6`                 | 4.03 (93)    
 | `>6 (Fail)`         | 1.13 (26)                
 
+<a name="access"></a>
+
 ## Accessing and Using the Engine Locally 
+
+<a name="clone"></a>
 
 ### Cloning and Navigating Repository 
 In the directory you want the repository to be located, run:
@@ -44,6 +60,8 @@ If you don't have Conda, most Python and Linux distributions have the necessary 
 conda deactivate
 ```
 
+<a name="applying"></a>
+
 ### Running the Algorithm on Sample Mystery Words. 
 The primary file for this is `'src/solve_wordle_multiple.py'`, which works for any number of $m \geq 1$ words solved simultaneously. For example, to solve a Quordle with words LIGHT, GOLEM, PAPER, and DIZZY, run from the main folder Wordle-Engine,
 ```
@@ -54,6 +72,8 @@ The program will output the number of guesses and the specific guesses it made. 
 python3 src/solve_wordle_multiple.py CANOE PLUMB WATER
 ```
 <br/>
+
+<a name="interactive"></a>
 
 ### Using the Interactive Command Line Tool 
 This tool for playing a live Wordle game (or any variant with $M$ words and $M+5$ tries) can be found in `'src/interactive_solve.py'`. From the main folder (Wordle-Engine), run 
@@ -74,6 +94,8 @@ A sample for playing the daily Quordle on October 8th is also shown below. Note 
 
 <br/>
 
+<a name="visualization"></a>
+
 ### Producing Wordle Board Visualizations 
 To produce visualizations like the game board on the website, the files `'src/solve_wordle.py'` and `'src/solve_dordle.py'` will come in handy. They harness plotting functions that are sourced in `'src/visualize_wordle.py'`. Currently, this repository supports plot visualization just for Wordle and Dordle. For example, from the main folder (Wordle-Engine), run 
 ```
@@ -84,6 +106,8 @@ This will run the Wordle engine on the word ISLET, and produce an image in `'sam
 python3 src/solve_dordle.py DREAM CRANE
 ```
 will run the two-word Wordle engine to solve DREAM and CRANE simultaneously, and produce an image in `'sample/dordle_DREAM_CRANE.jpg'`.
+
+<a name="implementation"></a>
 
 ## Engine Implementation Summary
 As a sketch, the algorithm uses a priority queue that ranks word candidates first based on (1) the number of mystery words they could still be (haven't been ruled out yet) and then (2) their frequency in a gigantic text corpus. The more mystery words a candidate could still match, the higher the ranking; if two candidates are tied in the former metric, the candidate with the highest frequency in the corpus is given a higher ranking. For each guess, the algorithm receives feedback in the form of letter color sequences from the Wordle game, trims the sets of candidates for each mystery word accordingly, re-ranks the candidates, and selects the highest-ranking one. 
