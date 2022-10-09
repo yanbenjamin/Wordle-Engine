@@ -83,13 +83,13 @@ engine. A sample usage for the daly Wordle (October 8th) is shown below. Here, t
 ![image of interactive engine for 1 word (Wordle)](./repo_images/interactive_1word.png?raw=true)
 
 <br/>
+
 A sample for playing the daily Quordle on October 8th is also shown below. Note that there are four color sequences per word as there are four words to solve simultaneously. The color annotations are identically applied. 
 
 <br/>
 
 ![image of interactive engine for 4 words (Quordle)](./repo_images/interactive_4words.png?raw=true)
 
-<br/>
 <br/>
 
 <a name="visualization"></a>
