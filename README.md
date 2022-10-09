@@ -19,6 +19,7 @@ As acknowledgement, this project makes use of the NYT Wordle list of 2309 five-l
 
 <a name="performance"></a>
 
+
 ## Performance 
 **Wordle:** For all 2309 possible words that inhabit the NYT Wordle solution list, here are the number of guesses required by the engine. 
 
