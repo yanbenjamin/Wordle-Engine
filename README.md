@@ -1,8 +1,4 @@
 # Wordle Engine 
-# Table of Contents
-1. [Description](#description) 
-2. [Dataset Credits] (#dataset)
-3. [Performance](#performance)
 
 <a name="description"></a>
 
