@@ -18,12 +18,6 @@ import sys
 import time 
 import numpy as np
 
-MAIN_DIR = "/Users/benjaminyan/Desktop/Projects/Wordle-Solver"
-FIGURES_DIR = MAIN_DIR + "/sample"
-SRC_DIR = MAIN_DIR + "/src"
-DOCS_DIR = MAIN_DIR + "/docs"
-TESTS_DIR = MAIN_DIR + "/tests"
-
 def getWordFrequency(word,frequency_dict):
     return frequency_dict[word]
 
@@ -103,6 +97,10 @@ def solve_two_words(word_1, word_2, nyt_words, frequency_dict, starter_word = "S
       ATTEMPTS.append(next_attempt)
   
   if (visuals == True):
+    #determine where to save the figures
+    current_file = os.path.abspath(__file__)
+    Wordle_directory = "/".join(current_file.split("/")[:-2])
+    FIGURES_DIR = Wordle_directory + "/sample"
     figure_path = os.path.join(FIGURES_DIR, "dordle_{}_{}.jpg".format(word_1, word_2))
     plot_dordle_fullboard(word_1, word_2, ATTEMPTS, figure_path)
   

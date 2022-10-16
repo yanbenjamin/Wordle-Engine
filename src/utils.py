@@ -1,5 +1,7 @@
 """
-[utils.py] file mainly used for developing and abstracting 
+utils.py
+---------------------
+file mainly used for developing and abstracting 
 helper functions for the Wordle program
 """
 
